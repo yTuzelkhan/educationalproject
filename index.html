@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaskFlow — Task Manager</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── App shell ── -->
+  <div class="app">
+    <header class="header">
+      <div class="header-left">
+        <svg class="logo" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="32" height="32" rx="8" fill="#4F46E5"/>
+          <path d="M9 16.5l5 5 9-9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h1>TaskFlow</h1>
+      </div>
+      <div class="header-right">
+        <a href="landing.html" class="btn-back">← Home</a>
+        <button class="btn-add" id="btnAdd">
+        <span>+</span> Add Task
+        </button>
+      </div>
+    </header>
+
+    <!-- Toolbar: search + filters -->
+    <div class="toolbar">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M13.5 13.5L17 17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search tasks…" autocomplete="off"/>
+      </div>
+      <select id="filterPriority" class="select">
+        <option value="all">All priorities</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+      <select id="filterCategory" class="select">
+        <option value="all">All categories</option>
+        <option value="Work">Work</option>
+        <option value="Personal">Personal</option>
+        <option value="Health">Health</option>
+        <option value="Finance">Finance</option>
+        <option value="Learning">Learning</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <!-- Status pills -->
+    <div class="pills" id="pillsBar">
+      <button class="pill active" data-status="all">All</button>
+      <button class="pill" data-status="active">Active</button>
+      <button class="pill" data-status="done">Done</button>
+    </div>
+
+    <!-- Task list -->
+    <main id="taskList" class="task-list"></main>
+
+    <!-- Stats bar -->
+    <footer class="stats" id="statsBar"></footer>
+  </div>
+
+  <!-- ── Modal ── -->
+  <div class="modal-backdrop hidden" id="modalBackdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <h2 id="modalTitle">Add Task</h2>
+        <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      </div>
+
+      <div class="form-group">
+        <label for="fTitle">Task name *</label>
+        <input type="text" id="fTitle" placeholder="What needs to be done?" autocomplete="off"/>
+        <span class="field-error hidden" id="titleError">Task name is required.</span>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fPriority">Priority</label>
+          <select id="fPriority">
+            <option value="high">🔴 High</option>
+            <option value="medium" selected>🟡 Medium</option>
+            <option value="low">🟢 Low</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="fCategory">Category</label>
+          <select id="fCategory">
+            <option>Work</option>
+            <option>Personal</option>
+            <option>Health</option>
+            <option>Finance</option>
+            <option>Learning</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="fDue">Due date</label>
+        <input type="date" id="fDue"/>
+      </div>
+
+      <div class="form-group">
+        <label for="fNotes">Notes</label>
+        <textarea id="fNotes" rows="2" placeholder="Optional notes…"></textarea>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-cancel" id="btnCancel">Cancel</button>
+        <button class="btn-save" id="btnSave">Add Task</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Delete confirm ── -->
+  <div class="modal-backdrop hidden" id="confirmBackdrop">
+    <div class="modal confirm-modal" role="dialog" aria-modal="true">
+      <p>Delete this task? This cannot be undone.</p>
+      <div class="modal-footer">
+        <button class="btn-cancel" id="confirmNo">Keep it</button>
+        <button class="btn-danger" id="confirmYes">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
