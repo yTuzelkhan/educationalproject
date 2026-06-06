@@ -536,6 +536,20 @@ body {
 }
 .footer p { font-size: .82rem; color: var(--text-3); }
 
+.footer-github {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .85rem;
+  font-weight: 500;
+  color: var(--text-2);
+  text-decoration: none;
+  transition: color .15s;
+}
+.footer-github svg { width: 18px; height: 18px; }
+.footer-github:hover { color: var(--indigo); }
+
 /* ── Animation ── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(18px); }
